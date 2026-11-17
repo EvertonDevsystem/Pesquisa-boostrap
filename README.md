@@ -1,11 +1,11 @@
-# 📚 Pesquisa Direcionada — Framework Bootstrap
+# Pesquisa  Framework Bootstrap
 
 > **Aplicação de frameworks web para aumento de produtividade em aplicações web com HTML e CSS.**
 > Baseado na documentação oficial de [getbootstrap.com](https://getbootstrap.com/) e no projeto de referência [micasa](https://github.com/wcrvieira/micasa).
 
 ---
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 bootstrap-research/
@@ -17,7 +17,7 @@ bootstrap-research/
 └── README.md               ← Este arquivo
 ```
 
-## 🎯 O que contém na pesquisa
+## O que contém na pesquisa
 
 A página `index.html` reúne os elementos gráficos solicitados:
 
@@ -47,7 +47,7 @@ Não precisa instalar nada — o Bootstrap é carregado via **CDN**.
    ```
    Depois acesse `http://localhost:8000`
 
-## 🚀 Como subir no GitHub (passo a passo)
+## Como subir no GitHub
 
 ### Opção 1 — Pelo site (mais fácil, sem instalar nada)
 
@@ -72,7 +72,7 @@ git remote add origin https://github.com/SEU-USUARIO/bootstrap-research.git
 git push -u origin main
 ```
 
-### 🌐 Publicar a página (GitHub Pages) — critério "Muito bom"
+###  Publicar a página (GitHub Pages)
 
 1. No repositório, vá em **Settings** → **Pages**
 2. Em *Source*, selecione **Deploy from a branch**
@@ -82,17 +82,13 @@ git push -u origin main
    https://SEU-USUARIO.github.io/bootstrap-research/
    ```
 
-## 📖 Referências
+##  Referências
 
 - **Documentação oficial:** [getbootstrap.com](https://getbootstrap.com/) — Bootstrap 5.3
 - **Projeto de referência (micasa):** [github.com/wcrvieira/micasa](https://github.com/wcrvieira/micasa) — por Wagner Cesar Vieira
 - **Mi casa ao vivo:** [wcrvieira.github.io/micasa](https://wcrvieira.github.io/micasa/)
 
-## ✅ Critérios de avaliação atendidos
 
-- [x] Pesquisa com elementos gráficos (infográfico, mapa conceitual, padlet)
-- [x] Exemplos de **containers** aplicando apenas classes do framework
-- [x] Exemplos de **barras de navegação** aplicando apenas classes do framework
 - [x] Testados os exemplos (arquivos separados em `exemplos/`)
 - [x] Projeto pronto para subir no GitHub
 - [x] Passo a passo de publicação pelo GitHub Pages incluso# Pesquisa-boostrap

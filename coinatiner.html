@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exemplo 1 — Containers no Bootstrap 5</title>
+  <!-- Bootstrap 5 via CDN (oficial: getbootstrap.com) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .demo-box { background: #e7f1ff; border: 1px dashed #0d6efd; padding: 1rem; margin-bottom: .5rem; }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- 
+    CONTÊINERES (Containers)
+    São o bloco de construção básico do Bootstrap.
+    Tipos:
+      .container         → largura fixa responsiva (centralizada, com margens)
+      .container-fluid   → 100% da largura, sempre
+      .container-{sm|md|lg|xl|xxl} → 100% até o breakpoint, depois fixa
+  -->
+
+  <!-- .container: largura máxima responsiva, centralizado -->
+  <div class="container my-4">
+    <h1 class="mb-3">.container <span class="badge bg-primary">fixo responsivo</span></h1>
+    <div class="demo-box">
+      Este conteúdo está dentro de <code>.container</code>. Redimensione a janela:
+      a largura muda em cada <em>breakpoint</em> (576px, 768px, 992px, 1200px, 1400px).
+    </div>
+  </div>
+
+  <!-- .container-fluid: largura total -->
+  <div class="container-fluid bg-primary text-white py-4">
+    <h2>.container-fluid <span class="badge bg-light text-dark">100% largura</span></h2>
+    <p>Este faixa colorida ocupa 100% da largura da tela em qualquer tamanho.</p>
+  </div>
+
+  <!-- .container-md: 100% até 768px, depois fixo -->
+  <div class="container-md my-4">
+    <h3>.container-md <span class="badge bg-success">até 768px é fluido</span></h3>
+    <div class="demo-box">
+      Abaixo de 768px (tablet/celular) este contêiner é 100% largo. Acima disso,
+      fica com largura fixa centralizada — ideal para conteúdo de leitura.
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

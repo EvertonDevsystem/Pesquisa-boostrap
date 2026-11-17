@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pesquisa: Framework Bootstrap — Produtividade em HTML & CSS</title>
+  <!-- Bootstrap 5.3.8 (CDN oficial - getbootstrap.com) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- highlight.js (destaque de código nos exemplos) -->
+  <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <style>
+    :root { --cor-primaria:#0f3d4d; --cor-acento:#14b8a6; }
+    body { font-family:'Segoe UI', system-ui, sans-serif; scroll-behavior:smooth; }
+    .hero-bg {
+      background: linear-gradient(135deg, #0f3d4d 0%, #134e5e 50%, #14b8a6 120%);
+      color:#fff; padding:6rem 0 5rem; position:relative; overflow:hidden;
+    }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0; opacity:.08;
+      background-image: radial-gradient(circle at 20% 50%, #fff 1px, transparent 1px),
+                        radial-gradient(circle at 80% 20%, #fff 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .section-title { position:relative; display:inline-block; padding-bottom:.5rem; margin-bottom:1.5rem; }
+    .section-title::after { content:''; position:absolute; left:0; bottom:0; width:60px; height:4px; background:var(--cor-acento); border-radius:2px; }
+    .stat-card { transition:transform .2s, box-shadow .2s; border:none; border-radius:14px; }
+    .stat-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(15,61,77,.18); }
+    .stat-num { font-size:2.6rem; font-weight:800; color:var(--cor-acento); line-height:1; }
+    /* Padlet (quadro de notas) */
+    .padlet-wrap { background:#f4f1ea; border-radius:16px; padding:2rem; }
+    .sticky-note {
+      background:#fff9c4; padding:1.2rem 1rem; border-radius:4px;
+      box-shadow:2px 3px 8px rgba(0,0,0,.12); transform:rotate(-1deg);
+      min-height:140px; position:relative; transition:transform .15s;
+    }
+    .sticky-note:nth-child(even){ background:#c8e6c9; transform:rotate(1.2deg); }
+    .sticky-note:nth-child(3n){ background:#bbdefb; transform:rotate(-.7deg); }
+    .sticky-note:hover { transform:rotate(0) scale(1.04); z-index:2; }
+    .sticky-note .pin { position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:16px; height:16px; background:#ef5350; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,.3); }
+    .sticky-note h6 { font-weight:700; color:#1a1a1a; margin-bottom:.5rem; font-size:.95rem; }
+    .sticky-note p { font-size:.82rem; color:#333; line-height:1.45; margin:0; }
+    /* Mapa conceitual */
+    .concept-svg { width:100%; height:auto; }
+    pre code { border-radius:10px; font-size:.85rem; }
+    .code-label { font-size:.75rem; color:#888; margin-bottom:.25rem; font-family:monospace; }
+    .demo-frame { border:2px dashed #14b8a6; border-radius:8px; padding:1rem; background:#f8fdfc; }
+    .navbar-demo { border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,.1); }
+    .ref-card { border-left:4px solid var(--cor-acento); }
+    footer { background:#0a2530; color:#9fb3ba; }
+    footer a { color:#14b8a6; }
+    .badge-verde { background:#14b8a6; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR (exemplo real do componente) ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#inicio"><i class="bi bi-bootstrap-fill text-info me-1"></i>Pesquisa Bootstrap</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPesquisa">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navPesquisa">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#infografico">Infográfico</a></li>
+        <li class="nav-item"><a class="nav-link" href="#mapa">Mapa Conceitual</a></li>
+        <li class="nav-item"><a class="nav-link" href="#padlet">Padlet</a></li>
+        <li class="nav-item"><a class="nav-link" href="#containers">Containers</a></li>
+        <li class="nav-item"><a class="nav-link" href="#navbars">Navbars</a></li>
+        <li class="nav-item"><a class="nav-link" href="#grid">Grid</a></li>
+        <li class="nav-item"><a class="nav-link" href="#componentes">Componentes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#referencias">Referências</a></li>
+        <li class="nav-item"><a class="btn btn-outline-info btn-sm ms-lg-2 mt-2 mt-lg-0" href="exemplos/01-containers.html" target="_blank">Ver Exemplos <i class="bi bi-box-arrow-up-right"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header id="inicio" class="hero-bg">
+  <div class="container position-relative" style="z-index:2">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <span class="badge bg-info text-dark mb-3">PESQUISA DIRECIONADA • FRAMEWORKS WEB</span>
+        <h1 class="display-4 fw-bold mb-3">Framework <span class="text-info">Bootstrap</span></h1>
+        <p class="lead fs-5 opacity-90 mb-4">
+          Como frameworks front-end aumentam a produtividade no desenvolvimento de
+          aplicações web com HTML e CSS — através de <strong>containers</strong>,
+          <strong>barras de navegação</strong>, sistema de <strong>grid</strong> e
+          dezenas de componentes prontos.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="#containers" class="btn btn-light btn-lg"><i class="bi bi-box-seam me-2"></i>Ver Exemplos</a>
+          <a href="https://getbootstrap.com/" target="_blank" class="btn btn-outline-light btn-lg"><i class="bi bi-book me-2"></i>Documentação Oficial</a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center d-none d-lg-block">
+        <i class="bi bi-bootstrap-fill" style="font-size:11rem; opacity:.85"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== INFOGRÁFICO ===================== -->
+<section id="infografico" class="py-5 bg-light">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Infográfico — Bootstrap em Números</h2>
+    <p class="text-muted mb-4">Dados que explicam por que o Bootstrap é o framework front-end mais usado do mundo.</p>
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="card stat-card text-center p-4 h-100">
+          <i class="bi bi-grid-3x3-gap fs-1 text-info mb-2"></i>
+          <div class="stat-num">12</div>
+          <div class="fw-semibold mt-1">Colunas no Grid</div>
+          <small class="text-muted">Sistema flexível de layout</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card text-center p-4 h-100">
+          <i class="bi bi-arrows-angle-expand fs-1 text-info mb-2"></i>
+          <div class="stat-num">5</div>
+          <div class="fw-semibold mt-1">Breakpoints</div>
+          <small class="text-muted">sm · md · lg · xl · xxl</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card text-center p-4 h-100">
+          <i class="bi bi-collection fs-1 text-info mb-2"></i>
+          <div class="stat-num">~30</div>
+          <div class="fw-semibold mt-1">Componentes</div>
+          <small class="text-muted">Navbar, cards, modais, forms...</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card text-center p-4 h-100">
+          <i class="bi bi-star-fill fs-1 text-info mb-2"></i>
+          <div class="stat-num">+170k</div>
+          <div class="fw-semibold mt-1">Estrelas no GitHub</div>
+          <small class="text-muted">Projeto mais popular de CSS</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barras comparativas: produtividade -->
+    <div class="card mt-4 border-0 shadow-sm p-4">
+      <h5 class="fw-bold mb-3"><i class="bi bi-graph-up-arrow text-success me-2"></i>Comparativo de produtividade (tempo para construir uma landing page)</h5>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between small mb-1"><span>HTML & CSS puro (do zero)</span><span class="fw-bold">~8 horas</span></div>
+        <div class="progress" style="height:22px"><div class="progress-bar bg-danger" style="width:100%">100%</div></div>
+      </div>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between small mb-1"><span>Com Bootstrap (classes prontas)</span><span class="fw-bold">~2 horas</span></div>
+        <div class="progress" style="height:22px"><div class="progress-bar bg-success" style="width:25%">25% do tempo</div></div>
+      </div>
+      <p class="small text-muted mb-0 mt-2"><i class="bi bi-info-circle"></i> Ganho estimado de <strong>~75% de produtividade</strong> em layouts padrão, sem escrever CSS do zero.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAPA CONCEITUAL ===================== -->
+<section id="mapa" class="py-5">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Mapa Conceitual</h2>
+    <p class="text-muted mb-4">Como os conceitos do Bootstrap se relacionam — do framework até o navegador.</p>
+    <div class="card border-0 shadow-sm p-4">
+      <svg class="concept-svg" viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg">
+        <!-- conexões -->
+        <g stroke="#14b8a6" stroke-width="2.5" fill="none" opacity=".7">
+          <line x1="450" y1="60" x2="150" y2="170"/>
+          <line x1="450" y1="60" x2="330" y2="170"/>
+          <line x1="450" y1="60" x2="570" y2="170"/>
+          <line x1="450" y1="60" x2="750" y2="170"/>
+          <!-- sub-conexões -->
+          <line x1="150" y1="230" x2="90" y2="330"/><line x1="150" y1="230" x2="210" y2="330"/>
+          <line x1="330" y1="230" x2="290" y2="330"/><line x1="330" y1="230" x2="370" y2="330"/>
+          <line x1="570" y1="230" x2="530" y2="330"/><line x1="570" y1="230" x2="610" y2="330"/>
+          <line x1="750" y1="230" x2="690" y2="330"/><line x1="750" y1="230" x2="810" y2="330"/>
+        </g>
+        <!-- nó central -->
+        <rect x="330" y="20" width="240" height="60" rx="30" fill="#0f3d4d"/>
+        <text x="450" y="48" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold">Bootstrap 5</text>
+        <text x="450" y="68" text-anchor="middle" fill="#14b8a6" font-size="11">Framework Front-end</text>
+        <!-- nós do meio -->
+        <g font-size="13" font-weight="bold" text-anchor="middle">
+          <rect x="70" y="170" width="160" height="50" rx="10" fill="#14b8a6"/><text x="150" y="200" fill="#fff">Grid System</text>
+          <rect x="250" y="170" width="160" height="50" rx="10" fill="#14b8a6"/><text x="330" y="200" fill="#fff">Containers</text>
+          <rect x="490" y="170" width="160" height="50" rx="10" fill="#14b8a6"/><text x="570" y="200" fill="#fff">Componentes</text>
+          <rect x="670" y="170" width="160" height="50" rx="10" fill="#14b8a6"/><text x="750" y="200" fill="#fff">Utilitários</text>
+        </g>
+        <!-- sub-nós -->
+        <g font-size="10.5" text-anchor="middle" fill="#0f3d4d">
+          <rect x="40" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="90" y="344">12 colunas</text>
+          <rect x="160" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="210" y="344">.row / .col</text>
+          <rect x="240" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="290" y="344">.container</text>
+          <rect x="320" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="370" y="344">.container-fluid</text>
+          <rect x="480" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="530" y="344">Navbar</text>
+          <rect x="560" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="610" y="344">Cards / Modais</text>
+          <rect x="640" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="690" y="344">Breakpoints</text>
+          <rect x="760" y="320" width="100" height="40" rx="8" fill="#e0f7f4" stroke="#14b8a6"/><text x="810" y="344">Classes de estilo</text>
+        </g>
+        <!-- resultado final -->
+        <rect x="300" y="400" width="300" height="45" rx="22" fill="#0f3d4d"/>
+        <text x="450" y="428" text-anchor="middle" fill="#14b8a6" font-size="15" font-weight="bold">Site Responsivo &amp; Produtivo 🚀</text>
+        <g stroke="#0f3d4d" stroke-width="2" opacity=".4">
+          <line x1="90" y1="360" x2="380" y2="400"/><line x1="370" y1="360" x2="420" y2="400"/>
+          <line x1="610" y1="360" x2="480" y2="400"/><line x1="810" y1="360" x2="520" y2="400"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PADLET (quadro de notas) ===================== -->
+<section id="padlet" class="py-5 bg-light">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Padlet — Quadro de Ideias</h2>
+    <p class="text-muted mb-4">Notas adesivas com os conceitos-chave (estilo Padlet/Miro).</p>
+    <div class="padlet-wrap">
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>O que é?</h6><p>Framework front-end open-source de HTML, CSS e JS para sites responsivos e mobile-first.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Mobile-first</h6><p>Projetado primeiro para celulares; classes como .col-md-* só ativam em telas maiores.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>CDN vs Download</h6><p>Use via CDN (2 linhas de link) ou baixe o CSS/JS. Sem instalação.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Breakpoints</h6><p>sm:576 · md:768 · lg:992 · xl:1200 · xxl:1400 pixels. Define quando o layout muda.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Grid de 12</h6><p>Divida a linha em até 12 colunas. .col-6 = metade, .col-4 = um terço.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Componentes</h6><p>Navbar, cards, botões, alertas, modais, carrossel, accordion, formulários...</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Utilitários</h6><p>Classes prontas: .mt-3 (margin), .text-center, .bg-primary, .d-flex... sem escrever CSS.</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="sticky-note"><span class="pin"></span><h6>Produtividade</h6><p>Menos CSS escrito, layout consistente, responsividade garantida, manutenção fácil.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXEMPLOS: CONTAINERS ===================== -->
+<section id="containers" class="py-5">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Exemplos — Containers</h2>
+    <p class="text-muted mb-4">Contêineres são o bloco básico do Bootstrap. Apenas aplicando classes, sem escrever CSS.</p>
+
+    <div class="row g-4">
+      <!-- .container -->
+      <div class="col-lg-6">
+        <h5><span class="badge badge-verde">1</span> <code>.container</code> — fixo responsivo</h5>
+        <p class="small text-muted">Largura máxima que muda em cada breakpoint, sempre centralizado.</p>
+        <div class="code-label">Código:</div>
+<pre><code class="language-html">&lt;div class="container"&gt;
+  &lt;h1&gt;Meu conteúdo&lt;/h1&gt;
+  &lt;p&gt;Centralizado e com largura máxima.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <a href="exemplos/01-containers.html" target="_blank" class="btn btn-sm btn-outline-info mt-2">Abrir exemplo completo <i class="bi bi-box-arrow-up-right"></i></a>
+      </div>
+      <!-- .container-fluid -->
+      <div class="col-lg-6">
+        <h5><span class="badge badge-verde">2</span> <code>.container-fluid</code> — 100% largura</h5>
+        <p class="small text-muted">Ocupa a tela inteira em qualquer tamanho. Ideal para faixas coloridas.</p>
+        <div class="code-label">Código:</div>
+<pre><code class="language-html">&lt;div class="container-fluid bg-primary text-white py-4"&gt;
+  Faixa colorida de ponta a ponta
+&lt;/div&gt;</code></pre>
+        <!-- demo ao vivo -->
+        <div class="demo-frame mt-3 p-0 overflow-hidden">
+          <div class="bg-primary text-white py-2 px-3 small">Isto é um container-fluid (100% da largura do box)</div>
+        </div>
+      </div>
+      <!-- .container-md -->
+      <div class="col-lg-6">
+        <h5><span class="badge badge-verde">3</span> <code>.container-md</code> — responsivo por breakpoint</h5>
+        <p class="small text-muted">100% até 768px; acima disso, largura fixa. Variantes: sm, md, lg, xl, xxl.</p>
+        <div class="code-label">Código:</div>
+<pre><code class="language-html">&lt;!-- fluido no celular, fixo no desktop --&gt;
+&lt;div class="container-md"&gt;
+  Conteúdo de leitura
+&lt;/div&gt;</code></pre>
+      </div>
+      <!-- estrutura padrão -->
+      <div class="col-lg-6">
+        <h5><span class="badge badge-verde">4</span> Estrutura padrão de página</h5>
+        <p class="small text-muted">Todo site Bootstrap começa assim — 2 linhas de CDN + um container.</p>
+        <div class="code-label">Código:</div>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;&lt;head&gt;
+  &lt;link href="...bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;h1&gt;Olá, Bootstrap!&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;script src="...bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXEMPLOS: NAVBARS ===================== -->
+<section id="navbars" class="py-5 bg-light">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Exemplos — Barras de Navegação</h2>
+    <p class="text-muted mb-4">Navbar responsiva com botão hambúrguer — apenas classes, zero CSS personalizado.</p>
+
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="code-label">Código da navbar (funcional, com dropdown e busca):</div>
+<pre><code class="language-html">&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Logo&lt;/a&gt;
+    &lt;button class="navbar-toggler" data-bs-toggle="collapse"
+            data-bs-target="#menu"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse" id="menu"&gt;
+      &lt;ul class="navbar-nav me-auto"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Início&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Sobre&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+      </div>
+      <div class="col-lg-5">
+        <h5>Demo ao vivo:</h5>
+        <p class="small text-muted">Redimensione a janela: abaixo de 992px ela vira hambúrguer.</p>
+        <div class="navbar-demo">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand fw-bold" href="#"><i class="bi bi-rocket-takeoff me-1"></i>Logo</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#demoMenu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="demoMenu">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Mais</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Ação 1</a></li>
+                      <li><a class="dropdown-item" href="#">Ação 2</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex"><input class="form-control form-control-sm me-2" type="search" placeholder="Buscar"><button class="btn btn-outline-success btn-sm" type="button">OK</button></form>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="mt-3 small">
+          <span class="badge bg-secondary me-1">.navbar-expand-lg</span> empilha abaixo de 992px<br>
+          <span class="badge bg-secondary me-1">.navbar-dark</span> texto claro p/ fundo escuro<br>
+          <span class="badge bg-secondary me-1">.active</span> marca a página atual<br>
+          <span class="badge bg-secondary me-1">data-bs-toggle</span> ativa o hambúrguer (JS)
+        </div>
+        <a href="exemplos/02-navbar.html" target="_blank" class="btn btn-sm btn-outline-info mt-3">Abrir navbar completa <i class="bi bi-box-arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXEMPLOS: GRID ===================== -->
+<section id="grid" class="py-5">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Exemplos — Sistema de Grid</h2>
+    <p class="text-muted mb-4">12 colunas por linha. Classes <code>.col-{breakpoint}-{tamanho}</code> controlam o layout responsivo.</p>
+    <div class="demo-frame">
+      <div class="row g-2 text-center text-white fw-bold small">
+        <div class="col-12"><div class="bg-info py-2 rounded">col-12 (linha inteira)</div></div>
+        <div class="col-6"><div class="bg-info py-2 rounded">col-6</div></div>
+        <div class="col-6"><div class="bg-info py-2 rounded">col-6</div></div>
+        <div class="col-md-4"><div class="bg-success py-2 rounded">col-md-4</div></div>
+        <div class="col-md-4"><div class="bg-success py-2 rounded">col-md-4</div></div>
+        <div class="col-md-4"><div class="bg-success py-2 rounded">col-md-4</div></div>
+        <div class="col-6 col-md-3"><div class="bg-warning py-2 rounded text-dark">col-6 col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="bg-warning py-2 rounded text-dark">col-6 col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="bg-warning py-2 rounded text-dark">col-6 col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="bg-warning py-2 rounded text-dark">col-6 col-md-3</div></div>
+      </div>
+      <p class="small text-muted mt-3 mb-0"><i class="bi bi-lightbulb text-warning"></i> Redimensione a janela: as colunas <code>col-md-*</code> empilham no celular (menos de 768px).</p>
+    </div>
+    <a href="exemplos/03-grid.html" target="_blank" class="btn btn-sm btn-outline-info mt-3">Abrir exemplo de grid completo <i class="bi bi-box-arrow-up-right"></i></a>
+  </div>
+</section>
+
+<!-- ===================== GALERIA DE COMPONENTES ===================== -->
+<section id="componentes" class="py-5 bg-light">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Galeria de Componentes</h2>
+    <p class="text-muted mb-4">Pronto, só aplicar classes — é assim que o Bootstrap acelera o desenvolvimento.</p>
+    <div class="row g-4">
+      <!-- Botões -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="fw-bold"><i class="bi bi-cursor text-info me-1"></i>Botões</h6>
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <button class="btn btn-primary btn-sm">Primary</button>
+              <button class="btn btn-success btn-sm">Success</button>
+              <button class="btn btn-outline-danger btn-sm">Outline</button>
+              <button class="btn btn-warning btn-sm">Warning</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Alertas -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="fw-bold"><i class="bi bi-bell text-info me-1"></i>Alertas</h6>
+            <div class="alert alert-success py-2 px-3 small mt-2 mb-1">✓ Operação concluída!</div>
+            <div class="alert alert-danger py-2 px-3 small mb-0">✗ Erro ao salvar.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Badges & Progress -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="fw-bold"><i class="bi bi-tag text-info me-1"></i>Badges & Barras</h6>
+            <span class="badge bg-primary">Novo</span> <span class="badge rounded-pill bg-danger">99+</span>
+            <div class="progress mt-2" style="height:10px"><div class="progress-bar bg-info" style="width:70%">70%</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Card -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://picsum.photos/seed/bootstrap/400/150" class="card-img-top" alt="imagem" style="height:100px;object-fit:cover">
+          <div class="card-body">
+            <h6 class="fw-bold">Card com imagem</h6>
+            <p class="small text-muted mb-2">Componente versátil para conteúdo.</p>
+            <a href="#" class="btn btn-sm btn-outline-primary">Saiba mais</a>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="fw-bold"><i class="bi bi-list-ul text-info me-1"></i>Accordion</h6>
+            <div class="accordion accordion-flush small mt-2" id="accDemo">
+              <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#a1">O que é Bootstrap?</button></h2>
+                <div id="a1" class="accordion-collapse collapse" data-bs-parent="#accDemo"><div class="accordion-body py-2">Framework front-end responsivo.</div></div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#a2">Precisa instalar?</button></h2>
+                <div id="a2" class="accordion-collapse collapse" data-bs-parent="#accDemo"><div class="accordion-body py-2">Não — basta o CDN (2 links).</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal & Form -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="fw-bold"><i class="bi bi-window-stack text-info me-1"></i>Modal & Formulário</h6>
+            <button class="btn btn-info btn-sm text-white mt-2" data-bs-toggle="modal" data-bs-target="#modalDemo">Abrir Modal</button>
+            <div class="input-group input-group-sm mt-2">
+              <input type="text" class="form-control" placeholder="Email">
+              <button class="btn btn-outline-secondary" type="button">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de demonstração -->
+<div class="modal fade" id="modalDemo" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title"><i class="bi bi-bootstrap-fill text-info me-1"></i>Modal do Bootstrap</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">Este é um componente modal pronto — funcionando com apenas classes e atributos <code>data-bs-*</code>, sem escrever JavaScript.</div>
+    <div class="modal-footer"><button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button><button type="button" class="btn btn-primary btn-sm">Salvar</button></div>
+  </div></div>
+</div>
+
+<!-- ===================== REFERÊNCIAS ===================== -->
+<section id="referencias" class="py-5">
+  <div class="container py-4">
+    <h2 class="section-title h1 fw-bold">Referências</h2>
+    <p class="text-muted mb-4">Materiais usados nesta pesquisa (conforme solicitado).</p>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card ref-card h-100 border-0 shadow-sm p-3">
+          <i class="bi bi-book fs-2 text-info"></i>
+          <h6 class="fw-bold mt-2">Documentação Oficial</h6>
+          <p class="small text-muted">getbootstrap.com — guia completo de instalação, componentes e classes.</p>
+          <a href="https://getbootstrap.com/" target="_blank" class="small">getbootstrap.com <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card ref-card h-100 border-0 shadow-sm p-3">
+          <i class="bi bi-github fs-2 text-dark"></i>
+          <h6 class="fw-bold mt-2">Repositório de Exemplo (micasa)</h6>
+          <p class="small text-muted">Projeto Mi casa — exemplo real de site construído com Bootstrap (HTML/CSS).</p>
+          <a href="https://github.com/wcrvieira/micasa.git" target="_blank" class="small">github.com/wcrvieira/micasa <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card ref-card h-100 border-0 shadow-sm p-3">
+          <i class="bi bi-globe fs-2 text-success"></i>
+          <h6 class="fw-bold mt-2">Projeto Mi casa (ao vivo)</h6>
+          <p class="small text-muted">Página publicada pelo GitHub Pages do professor Wagner Cesar Vieira.</p>
+          <a href="https://wcrvieira.github.io/micasa/" target="_blank" class="small">wcrvieira.github.io/micasa <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-4 small">
+      <i class="bi bi-info-circle me-1"></i>
+      <strong>Como publicar pelo GitHub (GitHub Pages):</strong> crie um repositório → suba estes arquivos → Settings → Pages → selecione a branch <code>main</code> → sua página fica online em <code>https://seu-usuario.github.io/nome-repositorio/</code>.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="py-4">
+  <div class="container text-center small">
+    <p class="mb-1"><i class="bi bi-bootstrap-fill me-1"></i> Pesquisa Direcionada — Framework Bootstrap</p>
+    <p class="mb-0 opacity-75">Aplicação de frameworks web para aumento de produtividade em HTML &amp; CSS • Baseado em getbootstrap.com e github.com/wcrvieira/micasa</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
